@@ -1,0 +1,13 @@
+{
+  "extends": ["wesbos/typescript"],
+  "rules": {
+    "quotes": [2, "double", { "avoidEscape": true }],
+    "prettier/prettier": [
+      "warn",
+      {
+        "singleQuote": false,
+        "semi": true
+      }
+    ]
+  }
+}
