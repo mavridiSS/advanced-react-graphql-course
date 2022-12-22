@@ -1,0 +1,20 @@
+{
+  "extends": ["wesbos/typescript"],
+  "rules": {
+    "quotes": "off",
+    "@typescript-eslint/quotes": [
+      "error",
+      "double",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "prettier/prettier": [
+      "warn",
+      {
+        "singleQuote": false,
+        "semi": true
+      }
+    ]
+  }
+}
