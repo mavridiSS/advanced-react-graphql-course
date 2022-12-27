@@ -7,6 +7,7 @@ import Page from "../components/Page";
 import withData from "../lib/withData";
 import "../components/styles/nprogress.css";
 import { ApolloProvider } from "@apollo/client";
+import { CartStateProvider } from "../lib/CartState";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -22,11 +23,13 @@ Router.events.on("routeChangeError", () => {
 
 function MyApp({ Component, pageProps, apollo }: AppProps) {
   return (
-    <ApolloProvider client={apollo}>
-      <Page>
-        <Component {...pageProps} />
-      </Page>
-    </ApolloProvider>
+    <CartStateProvider>
+      <ApolloProvider client={apollo}>
+        <Page>
+          <Component {...pageProps} />
+        </Page>
+      </ApolloProvider>
+    </CartStateProvider>
   );
 }
 
