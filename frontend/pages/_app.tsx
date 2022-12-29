@@ -8,6 +8,7 @@ import withData from "../lib/withData";
 import "../components/styles/nprogress.css";
 import { ApolloProvider } from "@apollo/client";
 import { CartStateProvider } from "../lib/CartState";
+import Gater from "../components/Gater";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -26,7 +27,9 @@ function MyApp({ Component, pageProps, apollo }: AppProps) {
     <CartStateProvider>
       <ApolloProvider client={apollo}>
         <Page>
-          <Component {...pageProps} />
+          <Gater>
+            <Component {...pageProps} />
+          </Gater>
         </Page>
       </ApolloProvider>
     </CartStateProvider>
