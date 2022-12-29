@@ -10,7 +10,10 @@ import styled from "styled-components";
 import NProgress from "nprogress";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 import SickButton from "./styles/SickButton";
+import { useCart } from "../lib/CartState";
+import { CURRENT_USER_QUERY } from "./User";
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($token: String!) {
@@ -37,12 +40,15 @@ const CheckoutFormStyles = styled.form`
 
 function CheckoutForm() {
   const [checkout, { error: graphQLError }] = useMutation(
-    CREATE_ORDER_MUTATION
+    CREATE_ORDER_MUTATION,
+    { refetchQueries: [{ query: CURRENT_USER_QUERY }] }
   );
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState();
   const stripe = useStripe();
+  const router = useRouter();
   const elements = useElements();
+  const { closeCart } = useCart();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,6 +70,13 @@ function CheckoutForm() {
       },
     });
 
+    router.push({
+      pathname: "/order/[id]",
+      query: {
+        id: order.data.checkout.id,
+      },
+    });
+    closeCart();
     setLoading(false);
     NProgress.done();
   };
