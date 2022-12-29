@@ -59,7 +59,6 @@ export default function Search() {
       return item?.name || "";
     },
   });
-  console.log(items, data);
   return (
     <SearchStyles>
       <div {...getComboboxProps()}>

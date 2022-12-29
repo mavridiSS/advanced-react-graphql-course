@@ -9,6 +9,7 @@ import Supreme from "./styles/Supreme";
 import CloseButton from "./styles/CloseButton";
 import { useUser } from "./User";
 import RemoveFromCart from "./RemoveFromCart";
+import Checkout from "./Checkout";
 
 const CartItemStyles = styled.li`
   padding: 1rem 0;
@@ -62,7 +63,10 @@ export default function Cart() {
           <CartItem key={item.id} item={item} />
         ))}
       </ul>
-      <footer>{formatMoney(calcTotalPrice(user.cart))}</footer>
+      <footer>
+        <p>{formatMoney(calcTotalPrice(user.cart))}</p>
+        <Checkout />
+      </footer>
     </CartStyles>
   );
 }
